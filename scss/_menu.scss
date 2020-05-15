@@ -1,0 +1,100 @@
+.navigation__toggler {
+    padding: 1em;
+    display: inline-block;
+    position: fixed;
+    top: 10px;
+    right: 30px;
+    z-index: 5;
+    svg {
+        fill: grey;
+    }
+    @media screen and (min-width: 993px) {
+        display: none;
+    }
+    
+}
+
+.dropdown {
+    will-change: transform;
+    @include posA ($top:0, $left:null, $delta_x: null, $delta_y: null);
+    right: 0;
+    width: 100vw;
+    height: 100vh;    
+    z-index: -1;
+    background-color: rgba(255,255,255, .8);
+    opacity: 0;
+    transform-origin: calc(100% - 15px) 15px;
+    transform: translate(0, 0) scale(.1);
+    @include tr(.5s);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 0 0;
+    .menu-opened & {
+        z-index: 2;
+        opacity: 1;
+        transform: translate(0, 0) scale(.3);
+        border: 1px solid rgba(1, 86, 102, .3);
+        align-items: center;
+        @media screen and (max-width: 992px) {
+            width: 200%;
+            height: 800px;
+            z-index: 2;
+            opacity: 1;
+            transform: translate(0, 0) scale(.2);
+            border: 1px solid rgba(1, 86, 102, .3);
+            align-items: center;
+            }
+    }
+    @media screen and (min-width: 993px) {
+    position: relative;
+    background-color: transparent;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    padding: 0;
+    z-index: 1;
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+    }
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    &__item {
+        @media screen and (max-width: 992px) {
+            width: 100%;
+            height: 20%;
+            @include hover {
+                background-color: rgba(55, 182, 206, .3);
+            }
+        }
+    }
+    &__link{
+        display: inline-block;
+
+        padding: .25em 0;
+
+        @include font($title-ff, 1.4rem, $text-color, 400, 1.85);
+        text-decoration: none;
+        text-transform: uppercase;
+
+        @include hover {
+           color: $body-color;
+        }
+
+        @media screen and (max-width: 992px) {
+            height: 15%;
+            @include font($title-ff, 7rem, rgba(0, 0, 0, .5), 400, 1);
+        }
+        .dropdown & {
+            padding: .72em;
+        }
+    }
+}
+
+.menu-opened {
+    overflow: hidden;
+}
